@@ -18,12 +18,12 @@
     });
   });
 
-  // Services: horizontal panels on wide screens, plain stack below lg.
+  // Services: panels slide horizontally as the page scrolls (all sizes).
   const svc = document.getElementById('services');
   const track = document.getElementById('services-track');
   if (svc && track) {
     ScrollTrigger.matchMedia({
-      '(min-width: 1024px) and (prefers-reduced-motion: no-preference)': () => {
+      '(prefers-reduced-motion: no-preference)': () => {
         const panels = gsap.utils.toArray<HTMLElement>('.hpanel');
         gsap.to(panels, {
           xPercent: -100 * (panels.length - 1), ease: 'none',
