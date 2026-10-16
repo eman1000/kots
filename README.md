@@ -2,7 +2,7 @@
 
 Marketing site for KOTS Group Investments (Harare) — air conditioning, commercial refrigeration and plumbing.
 
-Astro 7 + Tailwind v4, deployed to Cloudflare Workers (static assets + one server route for the enquiry form).
+Astro 7 + Tailwind v4, deployed on Vercel (static pages + one serverless route for the enquiry form). Node 24.
 
 ## Develop
 
@@ -11,7 +11,7 @@ nvm use            # Node 24 (.nvmrc)
 npm install
 npm run dev
 npm run build      # outputs dist/
-npm run preview    # runs the built Worker locally via wrangler
+npm run preview    # serves the build locally
 ```
 
 ## Content
@@ -22,7 +22,7 @@ Images in `public/images/` are placeholders lifted from the profile PDF — repl
 
 ## Enquiry form
 
-`POST /api/enquiry` (`src/pages/api/enquiry.ts`) emails the enquiry via Resend. Secrets (set with `wrangler secret put` or in the Cloudflare dashboard):
+`POST /api/enquiry` (`src/pages/api/enquiry.ts`) emails the enquiry via Resend. Environment variables (Vercel project → Settings → Environment Variables):
 
 | Secret | Purpose |
 | --- | --- |
@@ -34,9 +34,4 @@ Inputs are length-capped, control characters are stripped, there is a honeypot f
 
 ## Deploy
 
-```sh
-npx wrangler login
-npm run build && npx wrangler deploy
-```
-
-Then add `kotsgroup.com` as a custom domain on the Worker in the Cloudflare dashboard.
+The Vercel project `kots` (team `emans-projects-24fbaa83`) is connected to this GitHub repo; pushes to `main` deploy to production. Add `kotsgroup.com` under the project's Domains once registered.
