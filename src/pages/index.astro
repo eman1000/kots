@@ -5,15 +5,22 @@ import EnquiryForm from '../components/EnquiryForm.astro';
 import Marquee from '../components/Marquee.astro';
 import Assemble from '../components/Assemble.astro';
 import ServicePanels from '../components/ServicePanels.astro';
+import { Picture } from 'astro:assets';
 import { site, waLink } from '../site';
+import heroImg from '../assets/hero.jpg';
+import airconImg from '../assets/aircon.jpg';
+import coldroomImg from '../assets/coldroom.jpg';
+import plumbingImg from '../assets/plumbing.jpg';
+import commercialImg from '../assets/commercial.jpg';
+import crewImg from '../assets/crew.jpg';
 
 const headline = ['Keeping', 'Harare', 'cool,', 'cold', 'and', 'flowing.'];
 const services = [
-  { n: '01 — Cool', word: 'Cool', href: '/air-conditioning/', title: 'Air Conditioning', img: '/images/aircon.jpg',
+  { n: '01 — Cool', word: 'Cool', href: '/air-conditioning/', title: 'Air Conditioning', img: airconImg,
     text: 'Install, service, repair — homes to large buildings.', tags: ['Split systems', 'Cassette units', 'Multi-unit developments'] },
-  { n: '02 — Cold', word: 'Cold', href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/coldroom.jpg',
+  { n: '02 — Cold', word: 'Cold', href: '/refrigeration/', title: 'Commercial Refrigeration', img: coldroomImg,
     text: 'Cold rooms and commercial units that stay cold.', tags: ['Cold rooms', 'Breakdown response', 'Preventative maintenance'] },
-  { n: '03 — Flowing', word: 'Flowing', href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
+  { n: '03 — Flowing', word: 'Flowing', href: '/plumbing/', title: 'Plumbing', img: plumbingImg,
     text: 'Installations, renovations, leaks, maintenance.', tags: ['Bathrooms & kitchens', 'Water supply pipework', 'Leaks & repairs'] },
 ];
 const clients = ['Residential property owners', 'Cluster-home developers', 'Property developers', 'Commercial buildings', 'Retail businesses', 'Hotels & restaurants', 'Supermarkets', 'Institutions', 'Facilities managers', 'Construction companies', 'Industrial premises', 'Nationwide projects'];
@@ -27,7 +34,7 @@ const commitments = [
 <Base theme="dark" title="KOTS Group Investments — Air Conditioning, Refrigeration & Plumbing in Harare" description={`Air conditioning installation and repair, commercial refrigeration and plumbing in Harare and nationwide across Zimbabwe. Call ${site.phones[0].display}.`}>
   <!-- HERO -->
   <section class="grain relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-white">
-    <img src="/images/hero.jpg" alt="" width="1792" height="1024" class="absolute inset-0 -z-20 h-[120%] w-full object-cover" data-parallax="0.35" fetchpriority="high" />
+    <Picture src={heroImg} alt="" formats={['avif', 'webp']} widths={[640, 1024, 1440, 1920]} sizes="100vw" loading="eager" fetchpriority="high" class="absolute inset-0 -z-20 h-[120%] w-full object-cover" data-parallax="0.35" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/20"></div>
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/80 to-transparent"></div>
     <div class="container-x pb-14 pt-40 sm:pb-20">
@@ -63,7 +70,7 @@ const commitments = [
   <ServicePanels panels={services} />
 
   <!-- ASSEMBLY -->
-  <Assemble src="/images/crew.jpg" alt="KOTS technicians unloading an air-conditioning unit from a van" eyebrow="On site" title="One team. Every job." />
+  <Assemble src={crewImg} alt="KOTS technicians unloading an air-conditioning unit from a van" eyebrow="On site" title="One team. Every job." />
 
   <!-- WHO WE SERVE -->
   <section class="overflow-hidden border-y border-ink/10 py-16">
@@ -82,7 +89,7 @@ const commitments = [
         <div>
           <p class="eyebrow text-frost" data-reveal>Our commitment</p>
           <h2 class="display mt-4 text-4xl font-extrabold leading-[1] sm:text-5xl lg:text-6xl" data-reveal style="--d:60ms">Professional service. Dependable response. Quality work. Relationships that last.</h2>
-          <div class="img-frame mt-10 aspect-[16/10]" data-reveal style="--d:120ms"><img src="/images/commercial.jpg" alt="Commercial air-conditioning plant" width="1200" height="750" loading="lazy" class="!h-[120%]" data-parallax="0.25" /></div>
+          <div class="img-frame mt-10 aspect-[16/10]" data-reveal style="--d:120ms"><Picture src={commercialImg} alt="Commercial air-conditioning plant" formats={['avif', 'webp']} widths={[640, 1024, 1440]} sizes="(min-width: 1024px) 50vw, 100vw" loading="lazy" class="!h-[120%]" data-parallax="0.25" /></div>
         </div>
         <div class="grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
           {commitments.map((c, i) => (

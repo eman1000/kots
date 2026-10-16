@@ -9,7 +9,7 @@ for (const [label, vp] of [['desktop', { width: 1280, height: 800 }], ['mobile',
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   for (const p of pages) {
-    await page.goto('http://localhost:4321' + p, { waitUntil: 'load' });
+    await page.goto((process.env.BASE || 'http://localhost:4321') + p, { waitUntil: 'load' });
     // scroll through so IntersectionObserver reveals fire, then settle
     await page.evaluate(async () => { const h = document.body.scrollHeight; for (let y = 0; y < h; y += 500) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); });
     await page.addStyleTag({ content: '[data-reveal], .hero-word { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }' });

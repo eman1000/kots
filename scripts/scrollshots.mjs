@@ -7,7 +7,7 @@ for (const [label, vp] of [['d', { width: 1280, height: 800 }], ['m', { width: 3
   const page = await browser.newPage({ viewport: vp });
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await page.goto('http://localhost:4321/', { waitUntil: 'networkidle' });
+  await page.goto((process.env.BASE || 'http://localhost:4321') + '/', { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(1500);
   const total = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);

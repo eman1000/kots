@@ -1,7 +1,9 @@
 ---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { site } from '../site';
-interface Props { eyebrow: string; title: string; lead: string; body?: string; img: string; alt: string; w: number; h: number }
-const { eyebrow, title, lead, body, img, alt, w, h } = Astro.props;
+interface Props { eyebrow: string; title: string; lead: string; body?: string; img: ImageMetadata; alt: string }
+const { eyebrow, title, lead, body, img, alt } = Astro.props;
 ---
 <section class="container-x pt-36 pb-16 sm:pt-44 sm:pb-24">
   <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
@@ -15,6 +17,6 @@ const { eyebrow, title, lead, body, img, alt, w, h } = Astro.props;
         <a href="#enquiry" class="btn-ghost-dark">Request a quote</a>
       </div>
     </div>
-    <div class="img-frame aspect-[4/3] lg:aspect-[4/5]" data-reveal style="--d:140ms"><img src={img} alt={alt} width={w} height={h} fetchpriority="high" /></div>
+    <div class="img-frame aspect-[4/3] lg:aspect-[4/5]" data-reveal style="--d:140ms"><Picture src={img} alt={alt} formats={['avif', 'webp']} widths={[480, 768, 1086]} sizes="(min-width: 1024px) 45vw, 100vw" loading="eager" fetchpriority="high" /></div>
   </div>
 </section>

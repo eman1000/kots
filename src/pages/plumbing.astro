@@ -4,11 +4,12 @@ import ServiceHero from '../components/ServiceHero.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../site';
+import plumbingImg from '../assets/plumbing.jpg';
 const residential = ['Bathrooms', 'Kitchens', 'Water supply pipework', 'Sanitary installations', 'Leaks', 'Repairs', 'General maintenance'];
 const commercial = ['Offices', 'Retail facilities', 'Restaurants', 'Hotels', 'Institutions', 'Warehouses and other properties'];
 ---
-<Base title="Residential & Commercial Plumbing in Harare" description={`Plumbing installations, renovations, leak repairs and maintenance for homes, cluster developments, commercial premises and building projects in Harare. Call ${site.phones[0].display}.`} image="/images/plumbing.jpg">
-  <ServiceHero eyebrow="Residential & commercial plumbing" title="Plumbing, done properly." img="/images/plumbing.jpg" alt="Plumber fitting pipework" w={1024} h={1280}
+<Base title="Residential & Commercial Plumbing in Harare" description={`Plumbing installations, renovations, leak repairs and maintenance for homes, cluster developments, commercial premises and building projects in Harare. Call ${site.phones[0].display}.`}>
+  <ServiceHero eyebrow="Residential & commercial plumbing" title="Plumbing, done properly." img={plumbingImg} alt="Plumber fitting pipework"
     lead="New installations, renovations, leaks and maintenance. Homes to commercial premises." />
 
   <section class="border-t border-ink/10">

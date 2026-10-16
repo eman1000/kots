@@ -5,11 +5,12 @@ import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import Marquee from '../components/Marquee.astro';
 import { site } from '../site';
+import coldroomImg from '../assets/coldroom.jpg';
 const coverage = ['Installation support', 'Preventative maintenance', 'Cleaning', 'Fault diagnosis', 'Component replacement', 'Breakdown response for commercial refrigeration equipment and cold-storage systems'];
 const clients = ['Restaurants', 'Hotels', 'Supermarkets', 'Butcheries', 'Food outlets', 'Commercial kitchens', 'Beverage businesses', 'Cold-storage facilities'];
 ---
-<Base title="Commercial Refrigeration Maintenance & Breakdown Response in Harare" description={`Commercial refrigeration installation support, preventative maintenance, fault diagnosis and breakdown response for supermarkets, butcheries, hotels, restaurants and cold rooms in Harare. Call ${site.phones[0].display}.`} image="/images/coldroom.jpg">
-  <ServiceHero eyebrow="Commercial refrigeration" title="Cold that you can count on." img="/images/coldroom.jpg" alt="Technician inspecting a commercial cold room" w={1024} h={1280}
+<Base title="Commercial Refrigeration Maintenance & Breakdown Response in Harare" description={`Commercial refrigeration installation support, preventative maintenance, fault diagnosis and breakdown response for supermarkets, butcheries, hotels, restaurants and cold rooms in Harare. Call ${site.phones[0].display}.`}>
+  <ServiceHero eyebrow="Commercial refrigeration" title="Cold that you can count on." img={coldroomImg} alt="Technician inspecting a commercial cold room"
     lead="Cold rooms, display units and commercial kitchens. Maintained, repaired, back up fast." />
 
   <div class="display border-y border-ink/10 py-5 text-2xl font-bold sm:text-3xl"><Marquee items={clients} speed="45s" /></div>

@@ -1,5 +1,7 @@
 ---
-interface Props { src: string; alt: string; strips?: number; eyebrow: string; title: string }
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { src: ImageMetadata; alt: string; strips?: number; eyebrow: string; title: string }
 const { src, alt, strips = 7, eyebrow, title } = Astro.props;
 const idx = Array.from({ length: strips }, (_, i) => i);
 ---
@@ -7,7 +9,7 @@ const idx = Array.from({ length: strips }, (_, i) => i);
   <div class="absolute inset-0 flex">
     {idx.map((i) => (
       <div class="strip relative h-full flex-1 overflow-hidden will-change-transform">
-        <img src={src} alt="" width="1792" height="1024" loading="lazy" class="absolute top-0 h-full max-w-none object-cover" style={`width:${strips * 100}%;left:-${i * 100}%`} />
+        <Picture src={src} alt="" formats={['avif', 'webp']} widths={[768, 1280, 1920]} sizes="100vw" loading="lazy" class="absolute top-0 h-full max-w-none object-cover" style={`width:${strips * 100}%;left:-${i * 100}%`} />
       </div>
     ))}
   </div>

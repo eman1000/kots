@@ -4,6 +4,7 @@ import ServiceHero from '../components/ServiceHero.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../site';
+import airconImg from '../assets/aircon.jpg';
 const matrix = [
   { t: 'Installation & replacement', items: ['New installations', 'System replacement', 'Multi-unit development support'] },
   { t: 'Servicing & cleaning', items: ['Routine servicing', 'Cleaning', 'Performance checks', 'Preventative maintenance'] },
@@ -11,8 +12,8 @@ const matrix = [
   { t: 'Commercial buildings', items: ['Offices', 'Retail premises', 'Hotels', 'Institutions', 'Warehouses', 'Planned service programmes'] },
 ];
 ---
-<Base title="Air Conditioning Installation, Servicing & Repair in Harare" description={`Split and cassette air-conditioning installation, servicing, cleaning and fault repair for homes, cluster developments and commercial buildings in Harare. Call ${site.phones[0].display}.`} image="/images/aircon.jpg">
-  <ServiceHero eyebrow="Residential • Cluster homes • Buildings" title="Air Conditioning & HVAC" img="/images/aircon.jpg" alt="Technician servicing an air-conditioning unit" w={1024} h={1280}
+<Base title="Air Conditioning Installation, Servicing & Repair in Harare" description={`Split and cassette air-conditioning installation, servicing, cleaning and fault repair for homes, cluster developments and commercial buildings in Harare. Call ${site.phones[0].display}.`}>
+  <ServiceHero eyebrow="Residential • Cluster homes • Buildings" title="Air Conditioning & HVAC" img={airconImg} alt="Technician servicing an air-conditioning unit"
     lead="Split and cassette systems for homes, cluster developments and commercial buildings. Installed, serviced, repaired." />
 
   <section class="border-t border-ink/10">

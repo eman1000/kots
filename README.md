@@ -18,7 +18,7 @@ npm run preview    # serves the build locally
 
 All business facts (name, phones, email, service wording) live in `src/site.ts` and the page files under `src/pages/`. The copy was taken from the KOTS company profile; do not add claims that are not in it.
 
-Images in `public/images/` are placeholders lifted from the profile PDF — replace with real job photos.
+Images live in `src/assets/` and go through `astro:assets` (`<Picture>`/`<Image>`): Sharp emits AVIF + WebP at several widths into hashed `/_astro/` files, which Vercel serves with immutable year-long caching. Add new photos there and import them; do not put photos in `public/`. `public/og.jpg` is the social share image.
 
 ## Enquiry form
 

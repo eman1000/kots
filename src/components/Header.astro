@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { site, nav } from '../site';
+import logo from '../assets/logo.png';
+import logoWhite from '../assets/logo-white.png';
 interface Props { theme?: 'dark' | 'light' }
 const { theme = 'light' } = Astro.props;
 const path = Astro.url.pathname;
@@ -8,8 +11,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 <header id="site-header" data-theme={theme} class="fixed inset-x-0 top-0 z-40 transition-all duration-500">
   <div class="container-x flex h-20 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3" aria-label={`${site.name} home`}>
-      <img src="/images/logo.png" alt={site.name} width="421" height="108" class="logo-navy h-9 w-auto" />
-      <img src="/images/logo-white.png" alt="" width="421" height="108" class="logo-white h-9 w-auto" aria-hidden="true" />
+      <Image src={logo} alt={site.name} width={140} densities={[1, 2, 3]} loading="eager" class="logo-navy h-9 w-auto" />
+      <Image src={logoWhite} alt="" width={140} densities={[1, 2, 3]} loading="eager" class="logo-white h-9 w-auto" aria-hidden="true" />
     </a>
     <nav class="nav-links hidden items-center gap-8 md:flex" aria-label="Main">
       {nav.map((n) => (
