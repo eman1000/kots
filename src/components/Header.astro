@@ -8,7 +8,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 <header id="site-header" data-theme={theme} class="fixed inset-x-0 top-0 z-40 transition-all duration-500">
   <div class="container-x flex h-20 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3" aria-label={`${site.name} home`}>
-      <span class="flex h-11 items-center rounded-xl bg-white px-2 shadow-sm"><img src="/images/logo.png" alt={site.name} width="421" height="108" class="h-9 w-auto" /></span>
+      <img src="/images/logo.png" alt={site.name} width="421" height="108" class="logo-navy h-9 w-auto" />
+      <img src="/images/logo-white.png" alt="" width="421" height="108" class="logo-white h-9 w-auto" aria-hidden="true" />
     </a>
     <nav class="nav-links hidden items-center gap-8 md:flex" aria-label="Main">
       {nav.map((n) => (
@@ -38,6 +39,10 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   #site-header.scrolled { background: rgba(244,244,239,.85); color: #090c18; backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(9,12,24,.08); }
   #site-header.scrolled .container-x { height: 4.25rem; }
   #site-header.open { background: #090c18; color: #fff; }
+  /* logo variant follows the header's current background */
+  #site-header .logo-white { display: none; }
+  #site-header[data-theme='dark']:not(.scrolled) .logo-navy, #site-header.open .logo-navy { display: none; }
+  #site-header[data-theme='dark']:not(.scrolled) .logo-white, #site-header.open .logo-white { display: block; }
 </style>
 <script>
   const header = document.getElementById('site-header')!;
