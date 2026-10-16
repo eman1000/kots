@@ -8,24 +8,24 @@ import { site, waLink } from '../site';
 const headline = ['Keeping', 'Harare', 'cool,', 'cold', 'and', 'flowing.'];
 const services = [
   { n: '01', href: '/air-conditioning/', title: 'Air Conditioning & HVAC', img: '/images/aircon.jpg',
-    text: 'Installation, replacement, servicing and maintenance for homes, cluster-home developments and larger buildings.', tags: ['Split systems', 'Cassette units', 'Multi-unit developments'] },
+    text: 'Install, service, repair — homes to large buildings.', tags: ['Split systems', 'Cassette units', 'Multi-unit developments'] },
   { n: '02', href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/coldroom.jpg',
-    text: 'Dependable temperature control for restaurants, hotels, supermarkets, butcheries, commercial kitchens and cold storage.', tags: ['Cold rooms', 'Breakdown response', 'Preventative maintenance'] },
+    text: 'Cold rooms and commercial units that stay cold.', tags: ['Cold rooms', 'Breakdown response', 'Preventative maintenance'] },
   { n: '03', href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
-    text: 'New installations, renovations, repairs and ongoing maintenance for homes, developments and commercial premises.', tags: ['Bathrooms & kitchens', 'Water supply pipework', 'Leaks & repairs'] },
+    text: 'Installations, renovations, leaks, maintenance.', tags: ['Bathrooms & kitchens', 'Water supply pipework', 'Leaks & repairs'] },
 ];
 const clients = ['Residential property owners', 'Cluster-home developers', 'Property developers', 'Commercial buildings', 'Retail businesses', 'Hotels & restaurants', 'Supermarkets', 'Institutions', 'Facilities managers', 'Construction companies', 'Industrial premises', 'Nationwide projects'];
 const commitments = [
-  { t: 'Professional service', d: 'Professional installation practices and project coordination — single units or whole developments.' },
-  { t: 'Dependable response', d: 'Responsive maintenance and breakdown support to reduce equipment downtime.' },
-  { t: 'Quality workmanship', d: 'Equipment positioning, refrigerant pipework, condensate drainage and electrical interface done properly.' },
-  { t: 'Long-term relationships', d: 'Planned service programmes for developers, property managers and commercial sites.' },
+  { t: 'Professional service', d: 'Single units or whole developments.' },
+  { t: 'Dependable response', d: 'Breakdowns answered. Downtime kept short.' },
+  { t: 'Quality workmanship', d: 'Pipework, drainage, electrics — done properly.' },
+  { t: 'Long-term relationships', d: 'Planned servicing for developers and property managers.' },
 ];
 const steps = [
-  { n: '01', t: 'Reach us', d: 'Call, WhatsApp or send the form. Tell us what is cooling, freezing or leaking.' },
-  { n: '02', t: 'We scope it', d: 'Equipment, positioning, pipework, drainage, electrical interface and access — per project.' },
-  { n: '03', t: 'Install, service or repair', d: 'Field crew on site, coordinated across multiple units or properties where needed.' },
-  { n: '04', t: 'Keep it running', d: 'Planned servicing programmes and breakdown response, so downtime stays short.' },
+  { n: '01', t: 'Reach us', d: 'Call, WhatsApp or the form.' },
+  { n: '02', t: 'We scope it', d: 'Site, equipment, access.' },
+  { n: '03', t: 'Install, service or repair', d: 'Crew on site, one unit or a whole development.' },
+  { n: '04', t: 'Keep it running', d: 'Planned servicing and breakdown response.' },
 ];
 ---
 <Base theme="dark" title="KOTS Group Investments — Air Conditioning, Refrigeration & Plumbing in Harare" description={`Air conditioning installation and repair, commercial refrigeration and plumbing in Harare and nationwide across Zimbabwe. Call ${site.phones[0].display}.`}>
@@ -40,7 +40,7 @@ const steps = [
         {headline.map((w, i) => <span class="hero-word inline-block" style={`--d:${120 + i * 70}ms`}>{w}&nbsp;</span>)}
       </h1>
       <div class="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-        <p class="max-w-xl text-lg text-white/80 hero-word" style="--d:700ms">Air conditioning, commercial refrigeration and plumbing — installed, serviced and repaired by one technical team, for homes, developers and commercial premises.</p>
+        <p class="max-w-xl text-lg text-white/80 hero-word" style="--d:700ms">Air conditioning, commercial refrigeration and plumbing. One team, for homes, developers and commercial premises.</p>
         <div class="flex flex-wrap gap-3 hero-word" style="--d:800ms">
           <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
           <a href={waLink()} target="_blank" rel="noopener" class="btn-ghost">WhatsApp</a>
@@ -59,16 +59,8 @@ const steps = [
     <Marquee items={['Air Conditioning', 'Commercial Refrigeration', 'Plumbing', 'Projects', 'Procurement & Supplies']} speed="28s" sep="✦" />
   </div>
 
-  <!-- STATEMENT -->
-  <section class="container-x py-24 sm:py-32">
-    <p class="eyebrow text-red" data-reveal>About KOTS</p>
-    <p class="display mt-6 max-w-5xl text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-5xl" data-reveal style="--d:80ms">
-      A Zimbabwean technical services company providing <span class="text-red">air conditioning</span>, <span class="text-red">commercial refrigeration</span> and <span class="text-red">plumbing</span> solutions — combining practical field services with professional project coordination and procurement support.
-    </p>
-  </section>
-
   <!-- SERVICES -->
-  <section class="container-x pb-24 sm:pb-32">
+  <section class="container-x py-24 sm:py-32">
     <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
       <div class="hidden lg:block">
         <div class="img-frame sticky top-28 aspect-[4/5]" data-reveal>
@@ -92,7 +84,6 @@ const steps = [
             </a>
           ))}
         </div>
-        <p class="mt-6 text-sm text-ink/60">Plus project coordination and procurement &amp; supplies support alongside field services.</p>
       </div>
     </div>
   </section>
@@ -151,7 +142,7 @@ const steps = [
     <div data-reveal>
       <p class="eyebrow text-red">Get a quote</p>
       <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl">Tell us what you need.</h2>
-      <p class="mt-5 max-w-md text-ink/70">Send a few details and we will call you back. For urgent breakdowns, phone or WhatsApp us directly.</p>
+      <p class="mt-5 max-w-md text-ink/70">A few details and we call you back. Breakdown? Phone or WhatsApp.</p>
       <ul class="mt-8 space-y-2">
         {site.phones.map((p) => <li><a class="display text-2xl font-bold hover:text-red" href={`tel:${p.tel}`}>{p.display}</a></li>)}
         <li><a class="text-ink/70 underline-offset-4 hover:underline" href={`mailto:${site.email}`}>{site.email}</a></li>
