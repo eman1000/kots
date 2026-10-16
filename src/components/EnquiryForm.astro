@@ -6,22 +6,22 @@ const services = ['Air Conditioning', 'Commercial Refrigeration', 'Plumbing', 'P
 ---
 <form id="enquiry-form" class="grid gap-4" method="post" action="/api/enquiry/" novalidate data-wa={site.whatsapp}>
   <div class:list={['grid gap-4', compact ? '' : 'sm:grid-cols-2']}>
-    <label class="grid gap-1 text-sm font-semibold text-navy">Your name
+    <label class="grid gap-1 text-sm font-semibold text-ink">Your name
       <input class="field" name="name" required maxlength="120" autocomplete="name" />
     </label>
-    <label class="grid gap-1 text-sm font-semibold text-navy">Phone or WhatsApp
+    <label class="grid gap-1 text-sm font-semibold text-ink">Phone or WhatsApp
       <input class="field" name="phone" required maxlength="40" inputmode="tel" autocomplete="tel" placeholder="+263 …" />
     </label>
   </div>
-  <label class="grid gap-1 text-sm font-semibold text-navy">Service needed
+  <label class="grid gap-1 text-sm font-semibold text-ink">Service needed
     <select class="field" name="service">
       {services.map((s) => <option value={s} selected={s === service}>{s}</option>)}
     </select>
   </label>
-  <label class="grid gap-1 text-sm font-semibold text-navy">What do you need done?
+  <label class="grid gap-1 text-sm font-semibold text-ink">What do you need done?
     <textarea class="field" name="message" rows="4" required maxlength="2000" placeholder="e.g. 2 split units to install in a new cluster home in Borrowdale"></textarea>
   </label>
-  <label class="grid gap-1 text-sm font-semibold text-navy">Area / suburb <span class="font-normal text-slate-500">(optional)</span>
+  <label class="grid gap-1 text-sm font-semibold text-ink">Area / suburb <span class="font-normal text-slate-500">(optional)</span>
     <input class="field" name="area" maxlength="120" />
   </label>
   <!-- honeypot: real users never see or fill this -->

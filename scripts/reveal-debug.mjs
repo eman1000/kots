@@ -1,0 +1,15 @@
+import { chromium } from '@playwright/test';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+page.on('pageerror', (e) => console.log('PAGEERROR', e.message));
+await page.goto('http://localhost:4321/', { waitUntil: 'load' });
+console.log('html.js:', await page.evaluate(() => document.documentElement.classList.contains('js')));
+console.log('reveal els:', await page.evaluate(() => document.querySelectorAll('[data-reveal]').length), 'is-in before scroll:', await page.evaluate(() => document.querySelectorAll('[data-reveal].is-in').length));
+await page.evaluate(async () => { const h = document.body.scrollHeight; for (let y = 0; y < h; y += 400) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 120)); } });
+await page.waitForTimeout(800);
+const missing = await page.evaluate(() => [...document.querySelectorAll('[data-reveal]:not(.is-in)')].map(e => e.tagName + ' ' + (e.textContent || '').trim().slice(0, 40) + ' @' + Math.round(e.getBoundingClientRect().top + scrollY) + ' h' + Math.round(e.getBoundingClientRect().height)));
+console.log('is-in after scroll:', await page.evaluate(() => document.querySelectorAll('[data-reveal].is-in').length));
+console.log('missing:', missing.length, missing.slice(0, 12));
+const sample = await page.evaluate(() => { const e = document.querySelector('section.container-x p.display'); const cs = getComputedStyle(e); return { cls: e.className, opacity: cs.opacity, transform: cs.transform, delay: cs.transitionDelay }; });
+console.log('sample paragraph:', sample);
+await browser.close();

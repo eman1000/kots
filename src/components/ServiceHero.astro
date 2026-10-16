@@ -1,0 +1,20 @@
+---
+import { site } from '../site';
+interface Props { eyebrow: string; title: string; lead: string; body?: string; img: string; alt: string; w: number; h: number }
+const { eyebrow, title, lead, body, img, alt, w, h } = Astro.props;
+---
+<section class="container-x pt-36 pb-16 sm:pt-44 sm:pb-24">
+  <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+    <div>
+      <p class="eyebrow text-red" data-reveal>{eyebrow}</p>
+      <h1 class="display mt-4 text-[2rem] font-extrabold leading-[0.95] sm:text-6xl lg:text-7xl" data-reveal style="--d:60ms">{title}</h1>
+      <p class="mt-7 max-w-xl text-lg text-ink/80" data-reveal style="--d:120ms">{lead}</p>
+      {body && <p class="mt-4 max-w-xl text-ink/65" data-reveal style="--d:160ms">{body}</p>}
+      <div class="mt-8 flex flex-wrap gap-3" data-reveal style="--d:220ms">
+        <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
+        <a href="#enquiry" class="btn-ghost-dark">Request a quote</a>
+      </div>
+    </div>
+    <div class="img-frame aspect-[4/3] lg:aspect-[4/5]" data-reveal style="--d:140ms"><img src={img} alt={alt} width={w} height={h} fetchpriority="high" /></div>
+  </div>
+</section>

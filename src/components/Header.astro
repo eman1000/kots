@@ -1,39 +1,55 @@
 ---
 import { site, nav } from '../site';
+interface Props { theme?: 'dark' | 'light' }
+const { theme = 'light' } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-  <div class="container-x flex h-16 items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-2" aria-label={`${site.name} home`}>
-      <img src="/images/logo.png" alt={site.name} width="421" height="210" class="h-11 w-auto" />
+<header id="site-header" data-theme={theme} class="fixed inset-x-0 top-0 z-40 transition-all duration-500">
+  <div class="container-x flex h-20 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3" aria-label={`${site.name} home`}>
+      <span class="flex h-11 items-center rounded-xl bg-white px-2 shadow-sm"><img src="/images/logo.png" alt={site.name} width="421" height="210" class="h-9 w-auto" /></span>
     </a>
-    <nav class="hidden items-center gap-6 md:flex" aria-label="Main">
+    <nav class="nav-links hidden items-center gap-8 md:flex" aria-label="Main">
       {nav.map((n) => (
-        <a href={n.href} class:list={['text-sm font-semibold hover:text-red', isActive(n.href) ? 'text-red' : 'text-navy']}>{n.label}</a>
+        <a href={n.href} class:list={['relative text-[13px] font-semibold uppercase tracking-[0.14em] transition-opacity hover:opacity-100', isActive(n.href) ? 'opacity-100 after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-full after:bg-red' : 'opacity-70']}>{n.label}</a>
       ))}
     </nav>
-    <div class="flex items-center gap-2">
-      <a href={`tel:${site.phones[0].tel}`} class="btn-red hidden sm:inline-flex">Call {site.phones[0].display}</a>
-      <button id="nav-toggle" class="rounded-md border border-slate-300 p-2 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <div class="flex items-center gap-3">
+      <a href={`tel:${site.phones[0].tel}`} class="btn-red hidden !py-3 sm:inline-flex">Call now</a>
+      <button id="nav-toggle" class="nav-burger rounded-full border p-2.5 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
       </button>
     </div>
   </div>
-  <nav id="nav-mobile" class="hidden border-t border-slate-200 bg-white md:hidden" aria-label="Mobile">
-    <div class="container-x flex flex-col py-2">
-      {nav.map((n) => (
-        <a href={n.href} class:list={['py-3 text-sm font-semibold', isActive(n.href) ? 'text-red' : 'text-navy']}>{n.label}</a>
+  <nav id="nav-mobile" class="hidden bg-ink text-white md:hidden" aria-label="Mobile">
+    <div class="container-x flex flex-col py-4">
+      {nav.map((n, i) => (
+        <a href={n.href} class:list={['display border-b border-white/10 py-4 text-3xl font-bold', isActive(n.href) ? 'text-red' : '']}>{n.label}</a>
       ))}
-      <a href={`tel:${site.phones[0].tel}`} class="btn-red my-2">Call {site.phones[0].display}</a>
+      <a href={`tel:${site.phones[0].tel}`} class="btn-red mt-5">Call {site.phones[0].display}</a>
     </div>
   </nav>
 </header>
+<style>
+  #site-header[data-theme='dark'] { color: #fff; }
+  #site-header[data-theme='light'] { color: #090c18; }
+  #site-header .nav-burger { border-color: currentColor; opacity: .8; }
+  #site-header.scrolled { background: rgba(244,244,239,.85); color: #090c18; backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(9,12,24,.08); }
+  #site-header.scrolled .container-x { height: 4.25rem; }
+  #site-header.open { background: #090c18; color: #fff; }
+</style>
 <script>
-  const btn = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-mobile');
-  btn?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('hidden') === false;
+  const header = document.getElementById('site-header')!;
+  const btn = document.getElementById('nav-toggle')!;
+  const menu = document.getElementById('nav-mobile')!;
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24 && !header.classList.contains('open'));
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    header.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', String(open));
+    onScroll();
   });
 </script>

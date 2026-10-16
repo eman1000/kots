@@ -1,44 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
+import ServiceHero from '../components/ServiceHero.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
+import Marquee from '../components/Marquee.astro';
 import { site } from '../site';
 const coverage = ['Installation support', 'Preventative maintenance', 'Cleaning', 'Fault diagnosis', 'Component replacement', 'Breakdown response for commercial refrigeration equipment and cold-storage systems'];
 const clients = ['Restaurants', 'Hotels', 'Supermarkets', 'Butcheries', 'Food outlets', 'Commercial kitchens', 'Beverage businesses', 'Cold-storage facilities'];
 ---
-<Base title="Commercial Refrigeration Maintenance & Breakdown Response in Harare" description={`Commercial refrigeration installation support, preventative maintenance, fault diagnosis and breakdown response for supermarkets, butcheries, hotels, restaurants and cold rooms in Harare. Call ${site.phones[0].display}.`} image="/images/cold-room.jpg">
-  <section class="bg-ice">
-    <div class="container-x grid gap-10 py-16 md:grid-cols-2 md:items-center">
-      <div>
-        <p class="eyebrow">Commercial refrigeration</p>
-        <h1 class="h1 mt-2">Dependable temperature control for food and beverage businesses</h1>
-        <p class="mt-5 text-lg text-slate-700">Our refrigeration division focuses on commercial applications where dependable temperature control is essential — restaurants, hotels, supermarkets, butcheries, food outlets, commercial kitchens, beverage businesses and cold-storage facilities.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
-          <a href="#enquiry" class="btn-navy">Request a quote</a>
-        </div>
-      </div>
-      <img src="/images/cold-room.jpg" alt="KOTS technicians working on a commercial cold room" width="797" height="489" class="rounded-xl object-cover shadow-md" />
-    </div>
-  </section>
+<Base title="Commercial Refrigeration Maintenance & Breakdown Response in Harare" description={`Commercial refrigeration installation support, preventative maintenance, fault diagnosis and breakdown response for supermarkets, butcheries, hotels, restaurants and cold rooms in Harare. Call ${site.phones[0].display}.`} image="/images/coldroom.jpg">
+  <ServiceHero eyebrow="Commercial refrigeration" title="Cold that you can count on." img="/images/coldroom.jpg" alt="Technician inspecting a commercial cold room" w={1024} h={1280}
+    lead="Our refrigeration division focuses on commercial applications where dependable temperature control is essential — restaurants, hotels, supermarkets, butcheries, food outlets, commercial kitchens, beverage businesses and cold-storage facilities." />
 
-  <section class="container-x grid gap-10 py-16 md:grid-cols-2">
-    <div>
-      <p class="eyebrow">Service coverage</p>
-      <h2 class="h2 mt-2">What we cover</h2>
-      <ul class="mt-6 grid gap-2 text-slate-700">{coverage.map((c) => <li class="flex gap-2"><span class="text-red">•</span>{c}</li>)}</ul>
-    </div>
-    <div>
-      <p class="eyebrow">Who it's for</p>
-      <h2 class="h2 mt-2">Target clients</h2>
-      <ul class="mt-6 grid grid-cols-2 gap-3">{clients.map((c) => <li class="rounded-md border border-slate-200 px-4 py-3 text-sm font-semibold text-navy">{c}</li>)}</ul>
-    </div>
+  <div class="display border-y border-ink/10 py-5 text-2xl font-bold sm:text-3xl"><Marquee items={clients} speed="45s" /></div>
+
+  <section class="container-x py-20 sm:py-28">
+    <p class="eyebrow text-red" data-reveal>Service coverage</p>
+    <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">What we cover</h2>
+    <ol class="mt-12 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+      {coverage.map((c, i) => (
+        <li class="border-t-2 border-ink pt-5" data-reveal style={`--d:${i * 60}ms`}>
+          <p class="display text-sm font-bold text-red">0{i + 1}</p>
+          <p class="display mt-2 text-xl font-bold leading-snug">{c}</p>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <CtaStrip heading="Refrigeration breakdown or maintenance needed?" />
 
-  <section id="enquiry" class="container-x py-16">
-    <h2 class="h2">Request a refrigeration quote</h2>
-    <div class="card mt-6 max-w-3xl"><EnquiryForm service="Commercial Refrigeration" /></div>
+  <section id="enquiry" class="container-x py-24 sm:py-32">
+    <h2 class="display text-4xl font-extrabold leading-none sm:text-5xl" data-reveal>Request a refrigeration quote</h2>
+    <div class="mt-10 max-w-3xl rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-10" data-reveal style="--d:80ms"><EnquiryForm service="Commercial Refrigeration" /></div>
   </section>
 </Base>

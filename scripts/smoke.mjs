@@ -10,6 +10,12 @@ for (const [label, vp] of [['desktop', { width: 1280, height: 800 }], ['mobile',
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   for (const p of pages) {
     await page.goto('http://localhost:4321' + p, { waitUntil: 'load' });
+    // scroll through so IntersectionObserver reveals fire, then settle
+    await page.evaluate(async () => { const h = document.body.scrollHeight; for (let y = 0; y < h; y += 500) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); });
+    await page.addStyleTag({ content: '[data-reveal], .hero-word { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }' });
+    await page.waitForTimeout(600);
+    const wide = await page.evaluate(() => { const vw = document.documentElement.clientWidth; return [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > vw + 1 && getComputedStyle(e).position !== 'fixed').slice(0, 3).map(e => e.tagName + '.' + String(e.className).slice(0, 40)); });
+    if (wide.length) console.log('  overflowing:', wide.join(' ; '));
     const name = p === '/' ? 'home' : p.replaceAll('/', '');
     await page.screenshot({ path: `${out}/${label}-${name}.png`, fullPage: true });
     const hs = await page.evaluate(() => document.body.scrollWidth > document.documentElement.clientWidth);

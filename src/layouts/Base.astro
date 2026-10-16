@@ -3,10 +3,11 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Reveal from '../components/Reveal.astro';
 import { site } from '../site';
 
-interface Props { title: string; description: string; image?: string }
-const { title, description, image = '/images/cold-room.jpg' } = Astro.props;
+interface Props { title: string; description: string; image?: string; theme?: 'dark' | 'light' }
+const { title, description, image = '/images/hero.jpg', theme = 'light' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.domain).href;
 const fullTitle = Astro.url.pathname === '/' ? title : `${title} | ${site.name}`;
 
@@ -27,11 +28,15 @@ const ld = {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
@@ -39,13 +44,14 @@ const ld = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site.domain).href} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#1b2a63" />
+    <meta name="theme-color" content="#090c18" />
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body class="flex min-h-screen flex-col">
-    <Header />
+    <Header theme={theme} />
     <main class="flex-1"><slot /></main>
     <Footer />
     <WhatsAppButton />
+    <Reveal />
   </body>
 </html>

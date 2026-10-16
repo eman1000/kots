@@ -4,33 +4,21 @@ import EnquiryForm from '../components/EnquiryForm.astro';
 import { site, waLink } from '../site';
 ---
 <Base title="Contact KOTS Group Investments — Harare" description={`Call ${site.phones[0].display} or ${site.phones[1].display}, WhatsApp, or send an enquiry. Based in Harare, available nationwide across Zimbabwe.`}>
-  <section class="bg-ice">
-    <div class="container-x py-14">
-      <p class="eyebrow">Contact</p>
-      <h1 class="h1 mt-2">Talk to KOTS</h1>
-      <p class="mt-4 max-w-2xl text-lg text-slate-700">Based in {site.city} • Available for work nationwide across {site.country}.</p>
+  <section class="container-x pt-36 pb-12 sm:pt-44">
+    <p class="eyebrow text-red" data-reveal>Contact</p>
+    <h1 class="display mt-4 text-5xl font-extrabold leading-[0.95] sm:text-6xl lg:text-7xl" data-reveal style="--d:60ms">Talk to KOTS.</h1>
+    <a href={`tel:${site.phones[0].tel}`} class="display mt-8 block text-[9vw] font-extrabold leading-none hover:text-red sm:text-6xl lg:text-7xl" data-reveal style="--d:120ms">{site.phones[0].display}</a>
+    <a href={`tel:${site.phones[1].tel}`} class="display mt-2 block text-3xl font-bold text-ink/40 hover:text-red sm:text-4xl" data-reveal style="--d:160ms">{site.phones[1].display}</a>
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal style="--d:220ms">
+      <a href={waLink()} target="_blank" rel="noopener" class="btn-wa">Chat on WhatsApp</a>
+      <a href={`mailto:${site.email}`} class="btn-ghost-dark">{site.email}</a>
     </div>
+    <p class="mt-8 text-ink/60" data-reveal style="--d:260ms">Based in {site.city} • Available for work nationwide across {site.country}</p>
   </section>
-  <section class="container-x grid gap-10 py-16 md:grid-cols-5">
-    <div class="md:col-span-2">
-      <div class="grid gap-5">
-        <div class="card">
-          <h2 class="font-extrabold text-navy">Phone</h2>
-          <ul class="mt-2 space-y-1">{site.phones.map((p) => <li><a class="text-lg font-semibold text-navy hover:text-red" href={`tel:${p.tel}`}>{p.display}</a></li>)}</ul>
-        </div>
-        <div class="card">
-          <h2 class="font-extrabold text-navy">WhatsApp</h2>
-          <a href={waLink()} target="_blank" rel="noopener" class="btn-wa mt-3">Chat on WhatsApp</a>
-        </div>
-        <div class="card">
-          <h2 class="font-extrabold text-navy">Email</h2>
-          <a class="mt-2 inline-block font-semibold text-navy hover:text-red" href={`mailto:${site.email}`}>{site.email}</a>
-        </div>
-      </div>
-    </div>
-    <div class="card md:col-span-3">
-      <h2 class="h2">Send an enquiry</h2>
-      <p class="mt-2 mb-6 text-sm text-slate-600">We will call you back. For urgent breakdowns, phone or WhatsApp us directly.</p>
+  <section class="container-x pb-24 sm:pb-32">
+    <div class="rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-10 lg:p-14" data-reveal>
+      <h2 class="display text-3xl font-extrabold sm:text-4xl">Send an enquiry</h2>
+      <p class="mt-2 mb-8 text-ink/60">We will call you back. For urgent breakdowns, phone or WhatsApp us directly.</p>
       <EnquiryForm />
     </div>
   </section>

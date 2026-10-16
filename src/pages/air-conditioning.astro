@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ServiceHero from '../components/ServiceHero.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../site';
@@ -10,44 +11,34 @@ const matrix = [
   { t: 'Commercial buildings', items: ['Offices', 'Retail premises', 'Hotels', 'Institutions', 'Warehouses', 'Planned service programmes'] },
 ];
 ---
-<Base title="Air Conditioning Installation, Servicing & Repair in Harare" description={`Split and cassette air-conditioning installation, servicing, cleaning and fault repair for homes, cluster developments and commercial buildings in Harare. Call ${site.phones[0].display}.`} image="/images/aircon-install.jpg">
-  <section class="bg-ice">
-    <div class="container-x grid gap-10 py-16 md:grid-cols-2 md:items-center">
-      <div>
-        <p class="eyebrow">Residential • Cluster homes • Buildings</p>
-        <h1 class="h1 mt-2">Air Conditioning &amp; HVAC</h1>
-        <p class="mt-5 text-lg text-slate-700">{site.name} provides air-conditioning installation, servicing and maintenance support for individual homes, cluster-home developments and larger buildings. We support new installations, replacements, servicing and ongoing maintenance.</p>
-        <p class="mt-4 text-slate-600">Our HVAC scope may include split systems, cassette units and other suitable configurations. We coordinate equipment positioning, refrigerant pipework, condensate drainage, electrical interface requirements and maintenance access according to the project.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
-          <a href="#enquiry" class="btn-navy">Request a quote</a>
-        </div>
-      </div>
-      <img src="/images/aircon-install.jpg" alt="Technician installing a split air-conditioning unit" width="524" height="770" class="mx-auto max-h-[560px] rounded-xl object-cover shadow-md" />
-    </div>
-  </section>
+<Base title="Air Conditioning Installation, Servicing & Repair in Harare" description={`Split and cassette air-conditioning installation, servicing, cleaning and fault repair for homes, cluster developments and commercial buildings in Harare. Call ${site.phones[0].display}.`} image="/images/aircon.jpg">
+  <ServiceHero eyebrow="Residential • Cluster homes • Buildings" title="Air Conditioning & HVAC" img="/images/aircon.jpg" alt="Technician servicing an air-conditioning unit" w={1024} h={1280}
+    lead="Installation, servicing and maintenance support for individual homes, cluster-home developments and larger buildings — new installations, replacements, servicing and ongoing maintenance."
+    body="Our HVAC scope may include split systems, cassette units and other suitable configurations. We coordinate equipment positioning, refrigerant pipework, condensate drainage, electrical interface requirements and maintenance access according to the project." />
 
-  <section class="container-x py-16">
-    <p class="eyebrow">Service matrix</p>
-    <h2 class="h2 mt-2">What we cover</h2>
-    <div class="mt-8 grid gap-6 sm:grid-cols-2">
-      {matrix.map((m) => (
-        <div class="card">
-          <h3 class="font-extrabold text-navy">{m.t}</h3>
-          <ul class="mt-3 grid gap-1.5 text-sm text-slate-600">{m.items.map((i) => <li class="flex gap-2"><span class="text-red">•</span>{i}</li>)}</ul>
-        </div>
-      ))}
-    </div>
-    <div class="mt-10 rounded-xl border-l-4 border-red bg-ice p-6">
-      <h3 class="font-extrabold text-navy">Service philosophy</h3>
-      <p class="mt-2 text-slate-700">Our objective is reliable cooling, professional installation practices, responsive maintenance and reduced equipment downtime. Services can be coordinated across multiple units or properties for developers and property managers.</p>
+  <section class="border-t border-ink/10">
+    <div class="container-x py-20 sm:py-28">
+      <p class="eyebrow text-red" data-reveal>Service matrix</p>
+      <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">What we cover</h2>
+      <div class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 sm:grid-cols-2">
+        {matrix.map((m, i) => (
+          <div class="bg-paper p-8 sm:p-10" data-reveal style={`--d:${i * 70}ms`}>
+            <p class="display text-sm font-bold text-red">0{i + 1}</p>
+            <h3 class="display mt-3 text-2xl font-bold">{m.t}</h3>
+            <ul class="mt-4 space-y-1.5 text-ink/70">{m.items.map((it) => <li class="flex gap-3"><span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-red"></span>{it}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <blockquote class="display mt-16 max-w-4xl text-2xl font-bold leading-snug sm:text-3xl" data-reveal>
+        “Reliable cooling, professional installation practices, responsive maintenance and reduced equipment downtime — coordinated across multiple units or properties for developers and property managers.”
+      </blockquote>
     </div>
   </section>
 
   <CtaStrip heading="Need an aircon installed, serviced or repaired?" />
 
-  <section id="enquiry" class="container-x py-16">
-    <h2 class="h2">Request an air-conditioning quote</h2>
-    <div class="card mt-6 max-w-3xl"><EnquiryForm service="Air Conditioning" /></div>
+  <section id="enquiry" class="container-x py-24 sm:py-32">
+    <h2 class="display text-4xl font-extrabold leading-none sm:text-5xl" data-reveal>Request an air-conditioning quote</h2>
+    <div class="mt-10 max-w-3xl rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-10" data-reveal style="--d:80ms"><EnquiryForm service="Air Conditioning" /></div>
   </section>
 </Base>

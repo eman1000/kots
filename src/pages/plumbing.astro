@@ -1,41 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
+import ServiceHero from '../components/ServiceHero.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import { site } from '../site';
 const residential = ['Bathrooms', 'Kitchens', 'Water supply pipework', 'Sanitary installations', 'Leaks', 'Repairs', 'General maintenance'];
 const commercial = ['Offices', 'Retail facilities', 'Restaurants', 'Hotels', 'Institutions', 'Warehouses and other properties'];
 ---
-<Base title="Residential & Commercial Plumbing in Harare" description={`Plumbing installations, renovations, leak repairs and maintenance for homes, cluster developments, commercial premises and building projects in Harare. Call ${site.phones[0].display}.`}>
-  <section class="bg-ice">
-    <div class="container-x py-16">
-      <p class="eyebrow">Residential &amp; commercial plumbing</p>
-      <h1 class="h1 mt-2 max-w-3xl">Plumbing for homes, developments and commercial premises</h1>
-      <p class="mt-5 max-w-3xl text-lg text-slate-700">Services for homes, cluster developments, commercial premises and building projects, covering new installations, renovations, repairs and ongoing maintenance.</p>
-      <div class="mt-7 flex flex-wrap gap-3">
-        <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
-        <a href="#enquiry" class="btn-navy">Request a quote</a>
+<Base title="Residential & Commercial Plumbing in Harare" description={`Plumbing installations, renovations, leak repairs and maintenance for homes, cluster developments, commercial premises and building projects in Harare. Call ${site.phones[0].display}.`} image="/images/plumbing.jpg">
+  <ServiceHero eyebrow="Residential & commercial plumbing" title="Plumbing, done properly." img="/images/plumbing.jpg" alt="Plumber fitting pipework" w={1024} h={1280}
+    lead="Services for homes, cluster developments, commercial premises and building projects — covering new installations, renovations, repairs and ongoing maintenance." />
+
+  <section class="border-t border-ink/10">
+    <div class="container-x grid gap-px overflow-hidden py-20 sm:py-28 md:grid-cols-2 md:rounded-3xl md:border md:border-ink/10 md:bg-ink/10 md:py-0">
+      <div class="bg-paper py-8 md:p-12" data-reveal>
+        <p class="eyebrow text-red">Residential</p>
+        <h2 class="display mt-3 text-3xl font-extrabold">Homes &amp; cluster developments</h2>
+        <ul class="mt-6 space-y-2 text-lg text-ink/75">{residential.map((r) => <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-red"></span>{r}</li>)}</ul>
+      </div>
+      <div class="bg-paper py-8 md:p-12" data-reveal style="--d:100ms">
+        <p class="eyebrow text-red">Commercial</p>
+        <h2 class="display mt-3 text-3xl font-extrabold">Commercial premises &amp; projects</h2>
+        <ul class="mt-6 space-y-2 text-lg text-ink/75">{commercial.map((c) => <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-red"></span>{c}</li>)}</ul>
       </div>
     </div>
   </section>
 
-  <section class="container-x grid gap-8 py-16 md:grid-cols-2">
-    <div class="card">
-      <p class="eyebrow">Residential</p>
-      <h2 class="mt-2 text-xl font-extrabold text-navy">Homes &amp; cluster developments</h2>
-      <ul class="mt-4 grid gap-1.5 text-slate-700">{residential.map((r) => <li class="flex gap-2"><span class="text-red">•</span>{r}</li>)}</ul>
-    </div>
-    <div class="card">
-      <p class="eyebrow">Commercial</p>
-      <h2 class="mt-2 text-xl font-extrabold text-navy">Commercial premises &amp; projects</h2>
-      <ul class="mt-4 grid gap-1.5 text-slate-700">{commercial.map((c) => <li class="flex gap-2"><span class="text-red">•</span>{c}</li>)}</ul>
-    </div>
-  </section>
+  <CtaStrip heading="Leak, renovation or new installation?" />
 
-  <CtaStrip heading="Leak, renovation or new plumbing installation?" />
-
-  <section id="enquiry" class="container-x py-16">
-    <h2 class="h2">Request a plumbing quote</h2>
-    <div class="card mt-6 max-w-3xl"><EnquiryForm service="Plumbing" /></div>
+  <section id="enquiry" class="container-x py-24 sm:py-32">
+    <h2 class="display text-4xl font-extrabold leading-none sm:text-5xl" data-reveal>Request a plumbing quote</h2>
+    <div class="mt-10 max-w-3xl rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-10" data-reveal style="--d:80ms"><EnquiryForm service="Plumbing" /></div>
   </section>
 </Base>

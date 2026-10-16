@@ -1,0 +1,10 @@
+---
+interface Props { items: string[]; reverse?: boolean; speed?: string; class?: string; sep?: string }
+const { items, reverse = false, speed = '40s', class: cls = '', sep = '•' } = Astro.props;
+const list = [...items, ...items];
+---
+<div class:list={['marquee', reverse && 'marquee--reverse', cls]} style={`--speed:${speed}`} aria-hidden="true">
+  <div class="marquee__track">
+    {list.map((t) => <span class="flex items-center gap-10"><span>{t}</span><span class="text-red">{sep}</span></span>)}
+  </div>
+</div>

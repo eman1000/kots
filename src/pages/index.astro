@@ -2,96 +2,174 @@
 import Base from '../layouts/Base.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
+import Marquee from '../components/Marquee.astro';
 import { site, waLink } from '../site';
 
+const headline = ['Keeping', 'Harare', 'cool,', 'cold', 'and', 'flowing.'];
 const services = [
-  { href: '/air-conditioning/', title: 'Air Conditioning & HVAC', img: '/images/aircon-install.jpg',
-    text: 'Installation, replacement, servicing and maintenance for homes, cluster-home developments and larger buildings. Split systems, cassette units and other suitable configurations.' },
-  { href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/cold-room.jpg',
-    text: 'Installation support, preventative maintenance, fault diagnosis and breakdown response for restaurants, hotels, supermarkets, butcheries, commercial kitchens and cold-storage facilities.' },
-  { href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
-    text: 'New installations, renovations, repairs and ongoing maintenance for homes, cluster developments, commercial premises and building projects.' },
+  { n: '01', href: '/air-conditioning/', title: 'Air Conditioning & HVAC', img: '/images/aircon.jpg',
+    text: 'Installation, replacement, servicing and maintenance for homes, cluster-home developments and larger buildings.', tags: ['Split systems', 'Cassette units', 'Multi-unit developments'] },
+  { n: '02', href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/coldroom.jpg',
+    text: 'Dependable temperature control for restaurants, hotels, supermarkets, butcheries, commercial kitchens and cold storage.', tags: ['Cold rooms', 'Breakdown response', 'Preventative maintenance'] },
+  { n: '03', href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
+    text: 'New installations, renovations, repairs and ongoing maintenance for homes, developments and commercial premises.', tags: ['Bathrooms & kitchens', 'Water supply pipework', 'Leaks & repairs'] },
 ];
-const clients = ['Residential property owners', 'Cluster-home developers', 'Property developers', 'Commercial buildings', 'Retail businesses', 'Hotels & restaurants', 'Supermarkets', 'Institutions', 'Facilities managers', 'Construction companies', 'Industrial & operational premises', 'Nationwide project support'];
+const clients = ['Residential property owners', 'Cluster-home developers', 'Property developers', 'Commercial buildings', 'Retail businesses', 'Hotels & restaurants', 'Supermarkets', 'Institutions', 'Facilities managers', 'Construction companies', 'Industrial premises', 'Nationwide projects'];
 const commitments = [
-  { t: 'Professional service', d: 'Professional installation practices and project coordination across single units or whole developments.' },
+  { t: 'Professional service', d: 'Professional installation practices and project coordination — single units or whole developments.' },
   { t: 'Dependable response', d: 'Responsive maintenance and breakdown support to reduce equipment downtime.' },
   { t: 'Quality workmanship', d: 'Equipment positioning, refrigerant pipework, condensate drainage and electrical interface done properly.' },
   { t: 'Long-term relationships', d: 'Planned service programmes for developers, property managers and commercial sites.' },
 ];
+const steps = [
+  { n: '01', t: 'Reach us', d: 'Call, WhatsApp or send the form. Tell us what is cooling, freezing or leaking.' },
+  { n: '02', t: 'We scope it', d: 'Equipment, positioning, pipework, drainage, electrical interface and access — per project.' },
+  { n: '03', t: 'Install, service or repair', d: 'Field crew on site, coordinated across multiple units or properties where needed.' },
+  { n: '04', t: 'Keep it running', d: 'Planned servicing programmes and breakdown response, so downtime stays short.' },
+];
 ---
-<Base title="KOTS Group Investments — Air Conditioning, Refrigeration & Plumbing in Harare" description={`Air conditioning installation and repair, commercial refrigeration and plumbing in Harare and nationwide across Zimbabwe. Call ${site.phones[0].display}.`}>
-  <section class="relative isolate overflow-hidden bg-navy-dark text-white">
-    <img src="/images/cold-room.jpg" alt="" width="797" height="489" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-30" fetchpriority="high" />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-navy-dark via-navy-dark/90 to-navy-dark/40"></div>
-    <div class="container-x py-20 sm:py-28">
-      <p class="eyebrow text-red-300!">{site.tagline}</p>
-      <h1 class="mt-3 max-w-3xl text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">Reliable cooling, refrigeration and plumbing for Harare and beyond.</h1>
-      <p class="mt-5 max-w-2xl text-lg text-slate-200">{site.name} installs, services and repairs air-conditioning, commercial refrigeration and plumbing systems for homes, developers and commercial premises. Based in {site.city}, we mobilise for projects nationwide.</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
-        <a href={waLink()} target="_blank" rel="noopener" class="btn-wa">WhatsApp us</a>
-        <a href="#enquiry" class="btn-outline">Get a quote</a>
+<Base theme="dark" title="KOTS Group Investments — Air Conditioning, Refrigeration & Plumbing in Harare" description={`Air conditioning installation and repair, commercial refrigeration and plumbing in Harare and nationwide across Zimbabwe. Call ${site.phones[0].display}.`}>
+  <!-- HERO -->
+  <section class="grain relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-white">
+    <img src="/images/hero.jpg" alt="" width="1792" height="1024" class="absolute inset-0 -z-20 h-full w-full object-cover" fetchpriority="high" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/20"></div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/80 to-transparent"></div>
+    <div class="container-x pb-14 pt-40 sm:pb-20">
+      <p class="eyebrow text-frost hero-word inline-block" style="--d:0ms">Harare • Nationwide across Zimbabwe</p>
+      <h1 class="display mt-5 max-w-5xl text-[12vw] font-extrabold leading-[0.92] sm:text-7xl lg:text-[6.5rem]">
+        {headline.map((w, i) => <span class="hero-word inline-block" style={`--d:${120 + i * 70}ms`}>{w}&nbsp;</span>)}
+      </h1>
+      <div class="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+        <p class="max-w-xl text-lg text-white/80 hero-word" style="--d:700ms">Air conditioning, commercial refrigeration and plumbing — installed, serviced and repaired by one technical team, for homes, developers and commercial premises.</p>
+        <div class="flex flex-wrap gap-3 hero-word" style="--d:800ms">
+          <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
+          <a href={waLink()} target="_blank" rel="noopener" class="btn-ghost">WhatsApp</a>
+        </div>
+      </div>
+      <div class="mt-14 grid grid-cols-3 gap-6 border-t border-white/15 pt-6 text-sm hero-word" style="--d:950ms">
+        <div><p class="display text-3xl font-bold sm:text-4xl">03</p><p class="text-white/60">Divisions</p></div>
+        <div><p class="display text-3xl font-bold sm:text-4xl">HRE</p><p class="text-white/60">Based in Harare</p></div>
+        <div><p class="display text-3xl font-bold sm:text-4xl">ZW</p><p class="text-white/60">Nationwide coverage</p></div>
       </div>
     </div>
   </section>
 
-  <section class="container-x py-16">
-    <p class="eyebrow">What we do</p>
-    <h2 class="h2 mt-2">Three divisions, one responsive team</h2>
-    <div class="mt-8 grid gap-6 md:grid-cols-3">
-      {services.map((s) => (
-        <a href={s.href} class="card group overflow-hidden p-0 transition hover:shadow-md">
-          <img src={s.img} alt={s.title} width="800" height="500" loading="lazy" class="aspect-[16/10] w-full object-cover" />
-          <div class="p-6">
-            <h3 class="text-lg font-extrabold text-navy group-hover:text-red">{s.title}</h3>
-            <p class="mt-2 text-sm text-slate-600">{s.text}</p>
-            <span class="mt-4 inline-block text-sm font-semibold text-red">Learn more →</span>
-          </div>
-        </a>
-      ))}
-    </div>
-    <p class="mt-6 text-sm text-slate-600">We also provide project coordination and procurement &amp; supplies support alongside our field services.</p>
+  <!-- MARQUEE -->
+  <div class="display bg-red py-4 text-sm font-bold uppercase tracking-[0.2em] text-white">
+    <Marquee items={['Air Conditioning', 'Commercial Refrigeration', 'Plumbing', 'Projects', 'Procurement & Supplies']} speed="28s" sep="✦" />
+  </div>
+
+  <!-- STATEMENT -->
+  <section class="container-x py-24 sm:py-32">
+    <p class="eyebrow text-red" data-reveal>About KOTS</p>
+    <p class="display mt-6 max-w-5xl text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-5xl" data-reveal style="--d:80ms">
+      A Zimbabwean technical services company providing <span class="text-red">air conditioning</span>, <span class="text-red">commercial refrigeration</span> and <span class="text-red">plumbing</span> solutions — combining practical field services with professional project coordination and procurement support.
+    </p>
   </section>
 
-  <section class="bg-ice">
-    <div class="container-x grid gap-10 py-16 md:grid-cols-2 md:items-center">
+  <!-- SERVICES -->
+  <section class="container-x pb-24 sm:pb-32">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      <div class="hidden lg:block">
+        <div class="img-frame sticky top-28 aspect-[4/5]" data-reveal>
+          <img id="svc-img" src={services[0].img} alt="" width="1024" height="1280" loading="lazy" />
+        </div>
+      </div>
       <div>
-        <p class="eyebrow">Our commitment</p>
-        <h2 class="h2 mt-2">Professional service, dependable response, quality workmanship.</h2>
-        <dl class="mt-6 grid gap-5">
-          {commitments.map((c) => (
-            <div class="flex gap-3">
-              <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-red"></span>
-              <div><dt class="font-bold text-navy">{c.t}</dt><dd class="text-sm text-slate-600">{c.d}</dd></div>
+        <p class="eyebrow text-red" data-reveal>What we do</p>
+        <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">Three divisions.<br />One responsive team.</h2>
+        <div class="mt-10" id="svc-list">
+          {services.map((s, i) => (
+            <a href={s.href} class="svc-row group" data-img={s.img} data-reveal style={`--d:${i * 80}ms`}>
+              <span class="display text-sm font-bold text-red">{s.n}</span>
+              <span>
+                <span class="display block text-2xl font-bold sm:text-3xl">{s.title}</span>
+                <span class="mt-2 block max-w-lg text-sm text-ink/70 sm:text-base">{s.text}</span>
+                <span class="mt-3 flex flex-wrap gap-2">{s.tags.map((t) => <span class="rounded-full border border-ink/15 px-3 py-1 text-xs font-medium">{t}</span>)}</span>
+                <img src={s.img} alt={s.title} width="800" height="500" loading="lazy" class="mt-5 aspect-[16/10] w-full rounded-2xl object-cover lg:hidden" />
+              </span>
+              <span class="svc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          ))}
+        </div>
+        <p class="mt-6 text-sm text-ink/60">Plus project coordination and procurement &amp; supplies support alongside field services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="overflow-hidden border-y border-ink/10 py-16">
+    <div class="container-x"><p class="eyebrow text-red" data-reveal>Who we serve</p>
+      <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">From a single home to a supermarket cold room.</h2></div>
+    <div class="display mt-10 space-y-4 text-2xl font-bold sm:text-3xl">
+      <Marquee items={clients.slice(0, 6)} speed="55s" />
+      <Marquee items={clients.slice(6)} speed="60s" reverse class="text-ink/40" />
+    </div>
+  </section>
+
+  <!-- COMMITMENT -->
+  <section class="grain bg-ink text-white">
+    <div class="container-x py-24 sm:py-32">
+      <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div>
+          <p class="eyebrow text-frost" data-reveal>Our commitment</p>
+          <h2 class="display mt-4 text-4xl font-extrabold leading-[1] sm:text-5xl lg:text-6xl" data-reveal style="--d:60ms">Professional service. Dependable response. Quality work. Relationships that last.</h2>
+          <div class="img-frame mt-10 aspect-[16/10]" data-reveal style="--d:120ms"><img src="/images/commercial.jpg" alt="Commercial air-conditioning plant" width="1200" height="750" loading="lazy" /></div>
+        </div>
+        <div class="grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
+          {commitments.map((c, i) => (
+            <div class="bg-ink p-7 sm:p-9" data-reveal style={`--d:${i * 70}ms`}>
+              <p class="display text-sm font-bold text-red">0{i + 1}</p>
+              <h3 class="display mt-3 text-xl font-bold">{c.t}</h3>
+              <p class="mt-3 text-sm text-white/65">{c.d}</p>
             </div>
           ))}
-        </dl>
+        </div>
       </div>
-      <img src="/images/aircon-install.jpg" alt="KOTS technician servicing a wall-mounted air conditioner" width="524" height="770" loading="lazy" class="mx-auto max-h-[520px] rounded-xl object-cover shadow-md" />
     </div>
   </section>
 
-  <section class="container-x py-16">
-    <p class="eyebrow">Who we serve</p>
-    <h2 class="h2 mt-2">From single homes to supermarkets and hotels</h2>
-    <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {clients.map((c) => <li class="rounded-md border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy">{c}</li>)}
-    </ul>
+  <!-- PROCESS -->
+  <section class="container-x py-24 sm:py-32">
+    <p class="eyebrow text-red" data-reveal>How it works</p>
+    <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">Simple to start.<br />Easy to keep running.</h2>
+    <ol class="mt-12 grid gap-8 md:grid-cols-4">
+      {steps.map((s, i) => (
+        <li class="border-t-2 border-ink pt-5" data-reveal style={`--d:${i * 80}ms`}>
+          <p class="display text-4xl font-extrabold text-red">{s.n}</p>
+          <h3 class="display mt-3 text-xl font-bold">{s.t}</h3>
+          <p class="mt-2 text-sm text-ink/70">{s.d}</p>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <CtaStrip />
 
-  <section id="enquiry" class="container-x grid gap-10 py-16 md:grid-cols-5">
-    <div class="md:col-span-2">
-      <p class="eyebrow">Get a quote</p>
-      <h2 class="h2 mt-2">Tell us what you need</h2>
-      <p class="mt-3 text-slate-600">Send a few details and we will call you back. For urgent breakdowns, phone or WhatsApp us directly.</p>
-      <ul class="mt-6 space-y-2 text-sm">
-        {site.phones.map((p) => <li><a class="font-semibold text-navy hover:text-red" href={`tel:${p.tel}`}>{p.display}</a></li>)}
-        <li><a class="font-semibold text-navy hover:text-red" href={`mailto:${site.email}`}>{site.email}</a></li>
+  <!-- ENQUIRY -->
+  <section id="enquiry" class="container-x grid gap-12 py-24 sm:py-32 lg:grid-cols-[1fr_1.2fr]">
+    <div data-reveal>
+      <p class="eyebrow text-red">Get a quote</p>
+      <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl">Tell us what you need.</h2>
+      <p class="mt-5 max-w-md text-ink/70">Send a few details and we will call you back. For urgent breakdowns, phone or WhatsApp us directly.</p>
+      <ul class="mt-8 space-y-2">
+        {site.phones.map((p) => <li><a class="display text-2xl font-bold hover:text-red" href={`tel:${p.tel}`}>{p.display}</a></li>)}
+        <li><a class="text-ink/70 underline-offset-4 hover:underline" href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>
     </div>
-    <div class="card md:col-span-3"><EnquiryForm /></div>
+    <div class="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-[0_30px_80px_-40px_rgba(9,12,24,.35)] sm:p-10" data-reveal style="--d:100ms"><EnquiryForm /></div>
   </section>
 </Base>
+<script>
+  // Desktop: hovering a service row swaps the sticky image.
+  const img = document.getElementById('svc-img') as HTMLImageElement | null;
+  if (img) document.querySelectorAll<HTMLElement>('#svc-list .svc-row').forEach((row) => {
+    row.addEventListener('mouseenter', () => {
+      const next = row.dataset.img!;
+      if (img.getAttribute('src') === next) return;
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = next; img.style.opacity = '1'; }, 180);
+    });
+  });
+  if (img) img.style.transition = 'opacity .25s ease, transform 1.2s ease-out';
+</script>
