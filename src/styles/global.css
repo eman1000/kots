@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1b2a63;
+  --color-navy-dark: #121c45;
+  --color-red: #d62828;
+  --color-ice: #eef3fb;
+  --color-wa: #25d366;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-white text-slate-800 font-sans antialiased; }
+
+.container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+.btn-red { @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition bg-red text-white hover:bg-[#b71f1f]; }
+.btn-navy { @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition bg-navy text-white hover:bg-navy-dark; }
+.btn-outline { @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition border border-white/70 text-white hover:bg-white/10; }
+.btn-wa { @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition bg-wa text-white hover:bg-[#1fb85a]; }
+.eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em] text-red; }
+.h1 { @apply text-3xl font-extrabold leading-tight text-navy sm:text-4xl lg:text-5xl; }
+.h2 { @apply text-2xl font-extrabold text-navy sm:text-3xl; }
+.card { @apply rounded-xl border border-slate-200 bg-white p-6 shadow-sm; }
+.field { @apply w-full rounded-md border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-navy focus:ring-2 focus:ring-navy/20; }

@@ -1,0 +1,69 @@
+---
+import { site } from '../site';
+interface Props { service?: string; compact?: boolean }
+const { service = '', compact = false } = Astro.props;
+const services = ['Air Conditioning', 'Commercial Refrigeration', 'Plumbing', 'Project / Procurement', 'Other'];
+---
+<form id="enquiry-form" class="grid gap-4" method="post" action="/api/enquiry/" novalidate data-wa={site.whatsapp}>
+  <div class:list={['grid gap-4', compact ? '' : 'sm:grid-cols-2']}>
+    <label class="grid gap-1 text-sm font-semibold text-navy">Your name
+      <input class="field" name="name" required maxlength="120" autocomplete="name" />
+    </label>
+    <label class="grid gap-1 text-sm font-semibold text-navy">Phone or WhatsApp
+      <input class="field" name="phone" required maxlength="40" inputmode="tel" autocomplete="tel" placeholder="+263 …" />
+    </label>
+  </div>
+  <label class="grid gap-1 text-sm font-semibold text-navy">Service needed
+    <select class="field" name="service">
+      {services.map((s) => <option value={s} selected={s === service}>{s}</option>)}
+    </select>
+  </label>
+  <label class="grid gap-1 text-sm font-semibold text-navy">What do you need done?
+    <textarea class="field" name="message" rows="4" required maxlength="2000" placeholder="e.g. 2 split units to install in a new cluster home in Borrowdale"></textarea>
+  </label>
+  <label class="grid gap-1 text-sm font-semibold text-navy">Area / suburb <span class="font-normal text-slate-500">(optional)</span>
+    <input class="field" name="area" maxlength="120" />
+  </label>
+  <!-- honeypot: real users never see or fill this -->
+  <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <button type="submit" class="btn-red w-full sm:w-auto">Send enquiry</button>
+  <p id="enquiry-status" class="text-sm" role="status" aria-live="polite"></p>
+</form>
+<script>
+  const form = document.getElementById('enquiry-form') as HTMLFormElement | null;
+  const status = document.getElementById('enquiry-status');
+  const say = (msg: string, ok = true) => {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = `text-sm ${ok ? 'text-green-700' : 'text-red'}`;
+  };
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true;
+    say('Sending…');
+    try {
+      const r = await fetch('/api/enquiry/', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (r.ok) {
+        form.reset();
+        say('Thanks — your enquiry has been sent. We will call you back.');
+        return;
+      }
+      // Server could not deliver (e.g. email not configured yet). Hand the
+      // same message to WhatsApp so the enquiry still reaches KOTS.
+      const text = `Hi KOTS, enquiry from the website.\nName: ${data.name}\nPhone: ${data.phone}\nService: ${data.service}\nArea: ${data.area || '-'}\n\n${data.message}`;
+      window.open(`https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      say('Opening WhatsApp so you can send this directly.');
+    } catch {
+      say('Could not send. Please call or WhatsApp us instead.', false);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

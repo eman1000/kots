@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { site } from '../site';
+const residential = ['Bathrooms', 'Kitchens', 'Water supply pipework', 'Sanitary installations', 'Leaks', 'Repairs', 'General maintenance'];
+const commercial = ['Offices', 'Retail facilities', 'Restaurants', 'Hotels', 'Institutions', 'Warehouses and other properties'];
+---
+<Base title="Residential & Commercial Plumbing in Harare" description={`Plumbing installations, renovations, leak repairs and maintenance for homes, cluster developments, commercial premises and building projects in Harare. Call ${site.phones[0].display}.`}>
+  <section class="bg-ice">
+    <div class="container-x py-16">
+      <p class="eyebrow">Residential &amp; commercial plumbing</p>
+      <h1 class="h1 mt-2 max-w-3xl">Plumbing for homes, developments and commercial premises</h1>
+      <p class="mt-5 max-w-3xl text-lg text-slate-700">Services for homes, cluster developments, commercial premises and building projects, covering new installations, renovations, repairs and ongoing maintenance.</p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href={`tel:${site.phones[0].tel}`} class="btn-red">Call {site.phones[0].display}</a>
+        <a href="#enquiry" class="btn-navy">Request a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x grid gap-8 py-16 md:grid-cols-2">
+    <div class="card">
+      <p class="eyebrow">Residential</p>
+      <h2 class="mt-2 text-xl font-extrabold text-navy">Homes &amp; cluster developments</h2>
+      <ul class="mt-4 grid gap-1.5 text-slate-700">{residential.map((r) => <li class="flex gap-2"><span class="text-red">•</span>{r}</li>)}</ul>
+    </div>
+    <div class="card">
+      <p class="eyebrow">Commercial</p>
+      <h2 class="mt-2 text-xl font-extrabold text-navy">Commercial premises &amp; projects</h2>
+      <ul class="mt-4 grid gap-1.5 text-slate-700">{commercial.map((c) => <li class="flex gap-2"><span class="text-red">•</span>{c}</li>)}</ul>
+    </div>
+  </section>
+
+  <CtaStrip heading="Leak, renovation or new plumbing installation?" />
+
+  <section id="enquiry" class="container-x py-16">
+    <h2 class="h2">Request a plumbing quote</h2>
+    <div class="card mt-6 max-w-3xl"><EnquiryForm service="Plumbing" /></div>
+  </section>
+</Base>
