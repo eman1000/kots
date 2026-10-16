@@ -16,6 +16,7 @@
     "@astrojs/vercel": "^11.0.15",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.0",
+    "gsap": "^3.15.0",
     "tailwindcss": "^4.3.3",
     "wrangler": "^4.151.0"
   },

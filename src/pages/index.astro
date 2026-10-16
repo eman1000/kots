@@ -3,15 +3,17 @@ import Base from '../layouts/Base.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import EnquiryForm from '../components/EnquiryForm.astro';
 import Marquee from '../components/Marquee.astro';
+import Assemble from '../components/Assemble.astro';
+import ServicePanels from '../components/ServicePanels.astro';
 import { site, waLink } from '../site';
 
 const headline = ['Keeping', 'Harare', 'cool,', 'cold', 'and', 'flowing.'];
 const services = [
-  { n: '01', href: '/air-conditioning/', title: 'Air Conditioning & HVAC', img: '/images/aircon.jpg',
+  { n: '01 — Cool', word: 'Cool', href: '/air-conditioning/', title: 'Air Conditioning', img: '/images/aircon.jpg',
     text: 'Install, service, repair — homes to large buildings.', tags: ['Split systems', 'Cassette units', 'Multi-unit developments'] },
-  { n: '02', href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/coldroom.jpg',
+  { n: '02 — Cold', word: 'Cold', href: '/refrigeration/', title: 'Commercial Refrigeration', img: '/images/coldroom.jpg',
     text: 'Cold rooms and commercial units that stay cold.', tags: ['Cold rooms', 'Breakdown response', 'Preventative maintenance'] },
-  { n: '03', href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
+  { n: '03 — Flowing', word: 'Flowing', href: '/plumbing/', title: 'Plumbing', img: '/images/plumbing.jpg',
     text: 'Installations, renovations, leaks, maintenance.', tags: ['Bathrooms & kitchens', 'Water supply pipework', 'Leaks & repairs'] },
 ];
 const clients = ['Residential property owners', 'Cluster-home developers', 'Property developers', 'Commercial buildings', 'Retail businesses', 'Hotels & restaurants', 'Supermarkets', 'Institutions', 'Facilities managers', 'Construction companies', 'Industrial premises', 'Nationwide projects'];
@@ -21,17 +23,11 @@ const commitments = [
   { t: 'Quality workmanship', d: 'Pipework, drainage, electrics — done properly.' },
   { t: 'Long-term relationships', d: 'Planned servicing for developers and property managers.' },
 ];
-const steps = [
-  { n: '01', t: 'Reach us', d: 'Call, WhatsApp or the form.' },
-  { n: '02', t: 'We scope it', d: 'Site, equipment, access.' },
-  { n: '03', t: 'Install, service or repair', d: 'Crew on site, one unit or a whole development.' },
-  { n: '04', t: 'Keep it running', d: 'Planned servicing and breakdown response.' },
-];
 ---
 <Base theme="dark" title="KOTS Group Investments — Air Conditioning, Refrigeration & Plumbing in Harare" description={`Air conditioning installation and repair, commercial refrigeration and plumbing in Harare and nationwide across Zimbabwe. Call ${site.phones[0].display}.`}>
   <!-- HERO -->
   <section class="grain relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-white">
-    <img src="/images/hero.jpg" alt="" width="1792" height="1024" class="absolute inset-0 -z-20 h-full w-full object-cover" fetchpriority="high" />
+    <img src="/images/hero.jpg" alt="" width="1792" height="1024" class="absolute inset-0 -z-20 h-[120%] w-full object-cover" data-parallax="0.35" fetchpriority="high" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/20"></div>
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/80 to-transparent"></div>
     <div class="container-x pb-14 pt-40 sm:pb-20">
@@ -59,34 +55,15 @@ const steps = [
     <Marquee items={['Air Conditioning', 'Commercial Refrigeration', 'Plumbing', 'Projects', 'Procurement & Supplies']} speed="28s" sep="✦" />
   </div>
 
-  <!-- SERVICES -->
-  <section class="container-x py-24 sm:py-32">
-    <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-      <div class="hidden lg:block">
-        <div class="img-frame sticky top-28 aspect-[4/5]" data-reveal>
-          <img id="svc-img" src={services[0].img} alt="" width="1024" height="1280" loading="lazy" />
-        </div>
-      </div>
-      <div>
-        <p class="eyebrow text-red" data-reveal>What we do</p>
-        <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">Three divisions.<br />One responsive team.</h2>
-        <div class="mt-10" id="svc-list">
-          {services.map((s, i) => (
-            <a href={s.href} class="svc-row group" data-img={s.img} data-reveal style={`--d:${i * 80}ms`}>
-              <span class="display text-sm font-bold text-red">{s.n}</span>
-              <span>
-                <span class="display block text-2xl font-bold sm:text-3xl">{s.title}</span>
-                <span class="mt-2 block max-w-lg text-sm text-ink/70 sm:text-base">{s.text}</span>
-                <span class="mt-3 flex flex-wrap gap-2">{s.tags.map((t) => <span class="rounded-full border border-ink/15 px-3 py-1 text-xs font-medium">{t}</span>)}</span>
-                <img src={s.img} alt={s.title} width="800" height="500" loading="lazy" class="mt-5 aspect-[16/10] w-full rounded-2xl object-cover lg:hidden" />
-              </span>
-              <span class="svc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- SERVICES: three temperatures -->
+  <div class="container-x pt-24 pb-10 sm:pt-32">
+    <p class="eyebrow text-red" data-reveal>What we do</p>
+    <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-6xl" data-reveal style="--d:60ms">Three temperatures.<br />One team.</h2>
+  </div>
+  <ServicePanels panels={services} />
+
+  <!-- ASSEMBLY -->
+  <Assemble src="/images/crew.jpg" alt="KOTS technicians unloading an air-conditioning unit from a van" eyebrow="On site" title="One team. Every job." />
 
   <!-- WHO WE SERVE -->
   <section class="overflow-hidden border-y border-ink/10 py-16">
@@ -105,34 +82,18 @@ const steps = [
         <div>
           <p class="eyebrow text-frost" data-reveal>Our commitment</p>
           <h2 class="display mt-4 text-4xl font-extrabold leading-[1] sm:text-5xl lg:text-6xl" data-reveal style="--d:60ms">Professional service. Dependable response. Quality work. Relationships that last.</h2>
-          <div class="img-frame mt-10 aspect-[16/10]" data-reveal style="--d:120ms"><img src="/images/commercial.jpg" alt="Commercial air-conditioning plant" width="1200" height="750" loading="lazy" /></div>
+          <div class="img-frame mt-10 aspect-[16/10]" data-reveal style="--d:120ms"><img src="/images/commercial.jpg" alt="Commercial air-conditioning plant" width="1200" height="750" loading="lazy" class="!h-[120%]" data-parallax="0.25" /></div>
         </div>
         <div class="grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
           {commitments.map((c, i) => (
             <div class="bg-ink p-7 sm:p-9" data-reveal style={`--d:${i * 70}ms`}>
               <p class="display text-sm font-bold text-red">0{i + 1}</p>
-              <h3 class="display mt-3 text-xl font-bold">{c.t}</h3>
-              <p class="mt-3 text-sm text-white/65">{c.d}</p>
+              <h3 class="display mt-3 text-2xl font-bold">{c.t}</h3>
             </div>
           ))}
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="container-x py-24 sm:py-32">
-    <p class="eyebrow text-red" data-reveal>How it works</p>
-    <h2 class="display mt-3 text-4xl font-extrabold leading-none sm:text-5xl" data-reveal style="--d:60ms">Simple to start.<br />Easy to keep running.</h2>
-    <ol class="mt-12 grid gap-8 md:grid-cols-4">
-      {steps.map((s, i) => (
-        <li class="border-t-2 border-ink pt-5" data-reveal style={`--d:${i * 80}ms`}>
-          <p class="display text-4xl font-extrabold text-red">{s.n}</p>
-          <h3 class="display mt-3 text-xl font-bold">{s.t}</h3>
-          <p class="mt-2 text-sm text-ink/70">{s.d}</p>
-        </li>
-      ))}
-    </ol>
   </section>
 
   <CtaStrip />
@@ -151,16 +112,3 @@ const steps = [
     <div class="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-[0_30px_80px_-40px_rgba(9,12,24,.35)] sm:p-10" data-reveal style="--d:100ms"><EnquiryForm /></div>
   </section>
 </Base>
-<script>
-  // Desktop: hovering a service row swaps the sticky image.
-  const img = document.getElementById('svc-img') as HTMLImageElement | null;
-  if (img) document.querySelectorAll<HTMLElement>('#svc-list .svc-row').forEach((row) => {
-    row.addEventListener('mouseenter', () => {
-      const next = row.dataset.img!;
-      if (img.getAttribute('src') === next) return;
-      img.style.opacity = '0';
-      setTimeout(() => { img.src = next; img.style.opacity = '1'; }, 180);
-    });
-  });
-  if (img) img.style.transition = 'opacity .25s ease, transform 1.2s ease-out';
-</script>

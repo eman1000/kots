@@ -1,0 +1,19 @@
+---
+interface Props { src: string; alt: string; strips?: number; eyebrow: string; title: string }
+const { src, alt, strips = 7, eyebrow, title } = Astro.props;
+const idx = Array.from({ length: strips }, (_, i) => i);
+---
+<section id="assemble" class="relative h-[100svh] overflow-hidden bg-ink text-white" aria-label={alt}>
+  <div class="absolute inset-0 flex">
+    {idx.map((i) => (
+      <div class="strip relative h-full flex-1 overflow-hidden will-change-transform">
+        <img src={src} alt="" width="1792" height="1024" loading="lazy" class="absolute top-0 h-full max-w-none object-cover" style={`width:${strips * 100}%;left:-${i * 100}%`} />
+      </div>
+    ))}
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
+  <div class="asm-caption container-x absolute inset-x-0 bottom-0 pb-14 sm:pb-20">
+    <p class="eyebrow text-frost">{eyebrow}</p>
+    <h2 class="display mt-3 text-5xl font-extrabold leading-[0.95] sm:text-7xl lg:text-8xl">{title}</h2>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+// GSAP ScrollTrigger setup shared by every page: parallax on [data-parallax]
+// images, the strip "assembly" section and the horizontal service panels.
+---
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Parallax: element drifts slower than the page. data-parallax = strength (0.1–0.4)
+  if (!reduce) document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+    const k = parseFloat(el.dataset.parallax || '0.2');
+    gsap.fromTo(el, { yPercent: -k * 50 }, {
+      yPercent: k * 50, ease: 'none',
+      scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+    });
+  });
+
+  // Services: horizontal panels on wide screens, plain stack below lg.
+  const svc = document.getElementById('services');
+  const track = document.getElementById('services-track');
+  if (svc && track) {
+    ScrollTrigger.matchMedia({
+      '(min-width: 1024px) and (prefers-reduced-motion: no-preference)': () => {
+        const panels = gsap.utils.toArray<HTMLElement>('.hpanel');
+        gsap.to(panels, {
+          xPercent: -100 * (panels.length - 1), ease: 'none',
+          scrollTrigger: { trigger: svc, pin: true, scrub: 0.6, anticipatePin: 1, end: () => '+=' + (track.scrollWidth - innerWidth), invalidateOnRefresh: true },
+        });
+      },
+    });
+  }
+
+  // Assembly: strips start scattered and lock into one photo as you scroll.
+  const asm = document.getElementById('assemble');
+  if (asm) {
+    const strips = asm.querySelectorAll<HTMLElement>('.strip');
+    const caption = asm.querySelector<HTMLElement>('.asm-caption');
+    if (reduce) { caption?.classList.add('is-in'); }
+    else {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: asm, start: 'top top', end: '+=140%', scrub: 0.6, pin: true, anticipatePin: 1 } });
+      tl.from(strips, { yPercent: (i) => (i % 2 ? 70 : -70), opacity: 0, ease: 'power2.out', stagger: { each: 0.08, from: 'edges' }, duration: 1 })
+        .from(caption, { y: 30, opacity: 0, duration: 0.35 }, '-=0.15');
+    }
+  }
+
+  ScrollTrigger.sort();
+  addEventListener('load', () => ScrollTrigger.refresh());
+</script>

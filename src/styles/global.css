@@ -58,4 +58,5 @@ html.js .hero-word { opacity: 0; transform: translateY(26px); animation: rise .9
 
 .img-frame { @apply relative overflow-hidden rounded-[2rem]; }
 .img-frame img { @apply h-full w-full object-cover transition-transform duration-[1200ms] ease-out; }
+.img-frame img[data-parallax] { @apply -top-[10%] relative; }
 .img-frame:hover img { transform: scale(1.04); }
